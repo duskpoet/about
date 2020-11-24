@@ -50,7 +50,7 @@
           [:span.skill "clickhouse"]
           [:span.skill "c"]]]
        [:div.photo
-        [:iframe.tui-bg-orange-white {:src "/me.html"}]]]
+        [:iframe.tui-bg-orange-white {:src "me.html"}]]]
       [:section.job-exp.tui-window
         [:fieldset.tui-fieldset
           [:legend "Job experience"]
