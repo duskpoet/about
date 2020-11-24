@@ -14,8 +14,8 @@
     [:head
      [:meta {:http-equiv "content-type" :content "text/html; charset=utf-8"}]
      [:title "About Eduard's professional skills"]
-     (include-css "/tui/tuicss.min.css")
-     (include-css "/style.css")]
+     (include-css "tui/tuicss.min.css")
+     (include-css "style.css")]
     [:body
      [:div.content.tui-bg-yellow-white.center
       [:section.about-me.tui-window
