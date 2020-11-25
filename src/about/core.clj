@@ -5,7 +5,6 @@
             [clojure.java.shell :refer [sh]])
   (:gen-class))
 
-
 (def OUT "docs")
 
 (defn build-html []
@@ -23,13 +22,17 @@
 (defn mkdir []
   (sh "mkdir" OUT))
 
-(defn -main [& args]
-  (println "Statring build")
+(defn build []
   (clean)
   (mkdir)
   (build-assets)
   (build-html)
-  (build-css)
+  (build-css))
+
+(defn -main [& args]
+  (println "Statring build")
+  (build)
   (println "Done!")
   (System/exit 0))
 
+(build)

@@ -73,10 +73,11 @@ span.skill:hover>.skill-js {
 
 .job:not(:last-of-type) {
   border-bottom: 1px solid #ffffff;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
 }
 
-.place {
+.title {
   font-size: 20px;
   font-weight: bold;
 }
@@ -89,16 +90,25 @@ span.skill:hover>.skill-js {
   margin-top: 10px;
 }
 
-.job-notable {
+ul.job-notable {
   margin-top: 10px;
   color: #ffd27c;
 }
 
-.job-notable:before {
+ul.job-notable:before {
   content: 'Notable projects: ';
   font-weight: bold;
 }
 
+ul.job-notable li {
+  list-style-type: circle;
+  margin-left: 20px;
+}
+
 .links>a {
   margin-left: 24px;
+}
+
+.edu {
+  text-align: left;
 }
