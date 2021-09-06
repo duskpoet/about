@@ -1,24 +1,29 @@
 (ns about.css
-  (:require [garden.core :as garden]))
+  (:require [garden.core :as garden]
+            [garden.stylesheet :refer [at-media]]))
 
 (defn css []
   (garden/css
    [:body :html {:height "100%" :width "100%"}]
+   [:p {:margin 0}]
    [:div.content
     {:padding "50px"
      :width "100%"
-     :display "grid"
-     :grid-template "auto / 800px"
-     :justify-content "center"
-     :grid-row-gap "50px"}]
-   [:section {:max-width "1000px"}]
+     :display "flex"
+     :flex-direction "column"
+     :align-items "center"
+     :justify-content "flex-start"}]
+   [:section {:max-width "860px" :margin-top "40px"}]
    [:section.about-me
-    {:display "grid"
-     :grid-template "auto / 400px auto"
+    {:display "flex"
+     :justify-content "flex-start"
+     :align-items "flex-start"
      :text-align "left"
+     :margin-top "0"
      :padding "20px"}
     [:>* {:line-height "28px" :vertical-align "top"}]
     [:span.value {:margin-left "12px"}]]
+   [:div.photo {:margin-left "20px"}]
    [:iframe {:border 0 :width "322px" :height "368px"}]
    [:span.skills
     {:display "inline"}]
@@ -51,9 +56,9 @@
      :font-weight "bold"}]
    [:.job-title
     {:font-size "16px"}]
-   [:.job-description {:margin-top "10px"}]
+   [:.job-description {:margin-top "16px"}]
    [:ul.job-notable
-    {:margin-top "10px"
+    {:margin-top "8px"
      :color "#ffd27c"}
     [:&:before
      {:content "'Notable projects: '"
@@ -64,4 +69,18 @@
    [:.links>a
     {:margin-left "24px"}]
 
-   [:.edu {:text-align "left"}]))
+   [:.edu {:text-align "left"}]
+
+   (at-media {:max-width "800px"}
+    [:body {:font-size "14px"}]
+    [:div.content {:padding "20px"}]
+    [:section {:width "100%"}]
+    [:div.photo {:display "none"}]
+    [:section.about-me {:padding "10px"}]
+    [:.title {:font-size "16px"}]
+    [:span.skill
+      {:margin-left "8px"
+       :margin-top "8px"
+       :line-height "18px"}]
+    [:.links>a {:margin-left "8px"}]
+    [:section {:margin-top "20px"}])))

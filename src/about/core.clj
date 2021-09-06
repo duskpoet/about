@@ -34,5 +34,3 @@
   (build)
   (println "Done!")
   (System/exit 0))
-
-(build)

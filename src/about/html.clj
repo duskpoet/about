@@ -13,6 +13,7 @@
   (html5
    [:head
     [:meta {:http-equiv "content-type" :content "text/html; charset=utf-8"}]
+    [:meta {:name "viewport" :content "width=device-width,initial-scale=1.0,viewport-fit=cover"}]
     [:title "About Eduard's professional skills"]
     (include-css "tui/tuicss.min.css")
     (include-css "style.css")]
@@ -42,6 +43,7 @@
         [:span.skill "clojure"]
         [:span.skill "sql"]
         [:span.skill "mongo"]]
+       [:br]
        [:label "Some skills.:"]
        [:span.skills
         [:span.skill "python"]
@@ -57,7 +59,14 @@
        [:div.job
         [:div.title "Yandex"]
         [:div.job-title "Frontend dev. Since Apr. 2018"]
-        [:p.job-description "Developed web app for analytical tracking system"]
+
+        [:p.job-description "Alice (intelligent voice assistant) infrastructure developer"]
+        [:ul.job-notable
+          [:li "Improved platform for external developers"]
+          [:li "Mentored and guided a trainee"]
+          [:li "Improved backend rendering process for assistant visual responses"]]
+
+        [:p.job-description "Analytical tracking system developer"]
         [:ul.job-notable
          [:li "Introduced redux, redux-saga, react and typescript into project from scratch"]
          [:li "Developed applicative library for redux"]
@@ -65,10 +74,10 @@
        [:div.job
         [:div.title "bolt.com"]
         [:div.job-title "Frontend dev. Since Oct. 2016"]
-        [:p.job-description "Developed web checkout app, advertising site"]
+        [:p.job-description "Web developer"]
         [:ul.job-notable
          [:li "Wrote integration scripts for external ecommerce platforms"]
-         [:li "Build advertising web-site from scratch solo"]]]
+         [:li "Build advertising web-site from scratch"]]]
        [:div.job
         [:div.title "Mail.ru Group"]
         [:div.job-title "Frontend dev. Since Aug. 2015"]
