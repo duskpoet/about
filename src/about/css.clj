@@ -83,4 +83,15 @@
        :margin-top "8px"
        :line-height "18px"}]
     [:.links>a {:margin-left "8px"}]
-    [:section {:margin-top "20px"}])))
+    [:section {:margin-top "20px"}])
+   (at-media {:print true}
+    [:* {:color "#000 !important"}]
+    [:.tui-window {:box-shadow "none"}]
+    [:.links {:display "none"}]
+    [:legend {:font-size "1.5em" :font-weight "bold"}]
+    [:div.content {:padding 0}]
+    [:div.job 
+      ["&:not(:last-of-type)"
+       {:border-bottom "1px solid #ccc"}]])))
+
+    
