@@ -100,5 +100,4 @@
      [:section.links
       (link "mailto:bird.duskpoet@gmail.com" "Email")
       (link "https://habr.com/ru/post/522864" "Habr")
-      (link "https://github.com/duskpoet" "Github")
-      (link "https://t.me/duskpoet" "Tg")]]]))
+      (link "https://github.com/duskpoet" "Github")]]]))
