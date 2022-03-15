@@ -15,7 +15,7 @@
     [:meta {:http-equiv "content-type" :content "text/html; charset=utf-8"}]
     [:meta {:name "viewport" :content "width=device-width,initial-scale=1.0,viewport-fit=cover"}]
     [:title "About Eduard's professional skills"]
-    (include-css "tui/tuicss.min.css")
+    (include-css "assets/tui/tuicss.min.css")
     (include-css "style.css")]
    [:body
     [:div.content.tui-bg-yellow-white.center
@@ -48,14 +48,24 @@
        [:span.skills
         [:span.skill "python"]
         [:span.skill "docker"]
+        [:span.skill "kubernetes"]
         [:span.skill "nginx"]
         [:span.skill "clickhouse"]
         [:span.skill "c"]]]
       [:div.photo
-       [:iframe.tui-bg-orange-white {:src "me.html"}]]]
+       [:iframe.tui-bg-orange-white {:src "assets/me.html"}]]]
      [:section.job-exp.tui-window
       [:fieldset.tui-fieldset
        [:legend "Job experience"]
+       [:div.job
+        [:div.title "Cube.dev"]
+        [:div.job-title "Software engineer. Since Oct. 2021"]
+
+        [:p.job-description "Cloud infrastructure developer"]
+        [:ul.job-notable
+          [:li "Improved and updated several processes in cloud infrastructure"]
+          [:li "Implemented alerting system"]]]
+
        [:div.job
         [:div.title "Yandex"]
         [:div.job-title "Frontend dev. Since Apr. 2018"]
