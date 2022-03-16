@@ -1,13 +1,23 @@
 (ns about.html
   (:require [hiccup.page :refer [html5 include-css]]
+            [clojure.string :as string]
             [java-time :as jt]))
 
 (def BIRTH_DATE (jt/local-date 1990 11 2))
 (def AGE (jt/time-between BIRTH_DATE (jt/local-date) :years))
 
+(defn sanitize-link [url]
+ (string/replace-first url "mailto:" ""))
+
+(defn link-pads [content]
+  (let [size (apply + (map count content))]
+   (string/join (repeat (- 10 size) " "))))
+ 
 (defn link [url & content]
   [:a {:href url :target "_blank"}
-   (vec (cons :button.tui-button content))])
+   (vec (cons :button.tui-button content))
+   [:span.link-pads (link-pads content)]
+   [:span.link-href (sanitize-link url)]])
 
 (defn html []
   (html5
@@ -63,8 +73,8 @@
 
         [:p.job-description "Cloud infrastructure developer"]
         [:ul.job-notable
-          [:li "Improved and updated several processes in cloud infrastructure"]
-          [:li "Implemented alerting system"]]]
+          [:li "Implemented alerting system pipeline from scratch"]
+          [:li "Improved number of ui and infrastructure features"]]]
 
        [:div.job
         [:div.title "Yandex"]
@@ -72,9 +82,9 @@
 
         [:p.job-description "Alice (intelligent voice assistant) infrastructure developer"]
         [:ul.job-notable
+          [:li "Implemented backend rendering process for assistant visual responses as a microservice unit"]
           [:li "Improved platform for external developers"]
-          [:li "Mentored and guided a trainee"]
-          [:li "Improved backend rendering process for assistant visual responses"]]
+          [:li "Mentored and guided a trainee"]]
 
         [:p.job-description "Analytical tracking system developer"]
         [:ul.job-notable

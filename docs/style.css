@@ -120,6 +120,10 @@ ul.job-notable li {
   margin-left: 24px;
 }
 
+.links>a .link-href {
+  display: none;
+}
+
 .edu {
   text-align: left;
 }
@@ -176,8 +180,8 @@ ul.job-notable li {
     box-shadow: none;
   }
   
-  .links {
-    display: none;
+  .tui-button {
+    box-shadow: none;
   }
   
   legend {
@@ -187,6 +191,33 @@ ul.job-notable li {
   
   div.content {
     padding: 0;
+  }
+  
+  .links {
+    text-align: left;
+  }
+  
+  
+  
+  .links>a .tui-button:after {
+    content: '    ';
+  }
+  
+  .links>a .link-href {
+    display: initial;
+  }
+  
+  .links>a:after {
+    content: '\a';
+    white-space: pre;
+  }
+  
+  .links>a[href^="https://habr.com"] {
+    display: none;
+  }
+  
+  .link-pads {
+    white-space: pre;
   }
   
   

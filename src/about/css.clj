@@ -67,7 +67,9 @@
      {:list-style-type "circle"
       :margin-left "20px"}]]
    [:.links>a
-    {:margin-left "24px"}]
+    {:margin-left "24px"}
+    [:.link-href
+     {:display "none"}]]
 
    [:.edu {:text-align "left"}]
 
@@ -84,12 +86,21 @@
        :line-height "18px"}]
     [:.links>a {:margin-left "8px"}]
     [:section {:margin-top "20px"}])
+
    (at-media {:print true}
     [:* {:color "#000 !important"}]
     [:.tui-window {:box-shadow "none"}]
-    [:.links {:display "none"}]
+    [:.tui-button {:box-shadow "none"}]
     [:legend {:font-size "1.5em" :font-weight "bold"}]
     [:div.content {:padding 0}]
+    [:.links
+     {:text-align "left"}
+     [:&>a
+      [:.tui-button:after {:content "'    '"}]
+      [:.link-href {:display "initial"}]
+      [:&:after {:content "'\\a'" :white-space "pre"}]
+      ["&[href^=\"https://habr.com\"]" {:display "none"}]]]
+    [:.link-pads {:white-space "pre"}]
     [:div.job 
       ["&:not(:last-of-type)"
        {:border-bottom "1px solid #ccc"}]])))
