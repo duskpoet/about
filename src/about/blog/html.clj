@@ -1,5 +1,7 @@
 (ns about.blog.html
-  (:require [hiccup.page :refer [html5 include-css]]))
+  (:require
+   [about.html :refer [nav-bar]]
+   [hiccup.page :refer [html5 include-css]]))
 
 (defn blogs-html [blogs]
   (html5
@@ -10,6 +12,7 @@
       (include-css "assets/tui/tuicss.min.css")
       (include-css "style.css")]
     [:body
+      (nav-bar)
       [:div.content.tui-bg-cyan-white.blue-168-text.center
         [:div.container
          [:div.row
@@ -33,6 +36,7 @@
       (include-css "../assets/tui/tuicss.min.css")
       (include-css "../style.css")]
     [:body
+      (nav-bar)
       [:div.tui-bg-cyan-white
         [:div.container.article
          [:div.row

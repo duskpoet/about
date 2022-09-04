@@ -76,7 +76,8 @@
    
    [:.article 
     {:color "#1f1f1f"
-     :line-height "26px"}
+     :line-height "26px"
+     :padding "40px 0"}
     [:h1 {:font-size "24px"}]
     [:a {:color "#0000A8"}]
     [:pre {:background "#eaf5ee"

@@ -5,6 +5,7 @@
 
 (def BIRTH_DATE (jt/local-date 1990 11 2))
 (def AGE (jt/time-between BIRTH_DATE (jt/local-date) :years))
+(def BASE "https://duskpoet.github.io/about/")
 
 (defn sanitize-link [url]
  (string/replace-first url "mailto:" ""))
@@ -19,6 +20,12 @@
    [:span.link-pads (link-pads content)]
    [:span.link-href (sanitize-link url)]])
 
+(defn nav-bar []
+  [:nav.tui-nav
+   [:ul
+    [:li [:a {:href (str BASE "index.html")} "Home"]]
+    [:li [:a {:href (str BASE "blog.html")} "Blog"]]]])
+
 (defn html []
   (html5
    [:head
@@ -28,6 +35,7 @@
     (include-css "assets/tui/tuicss.min.css")
     (include-css "style.css")]
    [:body
+    (nav-bar)
     [:div.content.tui-bg-yellow-white.center
      [:section.about-me.tui-window
       [:div.info-me.white-255-text
