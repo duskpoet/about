@@ -121,4 +121,4 @@
       (link "mailto:bird.duskpoet@gmail.com" "Email")
       (link "https://habr.com/ru/post/522864" "Habr")
       (link "https://github.com/duskpoet" "Github")
-      (link "/blog.html" "Blog")]]]))
+      (link "blog.html" "Blog")]]]))
