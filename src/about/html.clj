@@ -14,7 +14,7 @@
    (string/join (repeat (- 10 size) " "))))
  
 (defn link [url & content]
-  [:a {:href url :target "_blank"}
+  [:a {:href url}
    (vec (cons :button.tui-button content))
    [:span.link-pads (link-pads content)]
    [:span.link-href (sanitize-link url)]])
@@ -120,4 +120,5 @@
      [:section.links
       (link "mailto:bird.duskpoet@gmail.com" "Email")
       (link "https://habr.com/ru/post/522864" "Habr")
-      (link "https://github.com/duskpoet" "Github")]]]))
+      (link "https://github.com/duskpoet" "Github")
+      (link "/blog.html" "Blog")]]]))

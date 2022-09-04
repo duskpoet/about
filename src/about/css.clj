@@ -9,6 +9,7 @@
    [:div.content
     {:padding "50px"
      :width "100%"
+     :min-height "100%"
      :display "flex"
      :flex-direction "column"
      :align-items "center"
@@ -72,6 +73,17 @@
      {:display "none"}]]
 
    [:.edu {:text-align "left"}]
+   
+   [:.article 
+    {:color "#1f1f1f"
+     :line-height "26px"}
+    [:h1 {:font-size "24px"}]
+    [:a {:color "#0000A8"}]
+    [:pre {:background "#eaf5ee"
+           :padding "10px"
+           :border-radius "4px"
+           :border "1px solid #ccc"
+           :white-space "break-spaces"}]]
 
    (at-media {:max-width "800px"}
     [:body {:font-size "14px"}]

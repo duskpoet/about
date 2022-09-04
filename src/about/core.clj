@@ -1,8 +1,10 @@
 (ns about.core
-  (:require [about.html :refer [html]]
-            [about.css :refer [css]]
-            [clojure.java.io :as io]
-            [clojure.java.shell :refer [sh]])
+  (:require
+   [about.blog.core :refer [build-blogs]]
+   [about.css :refer [css]]
+   [about.html :refer [html]]
+   [clojure.java.io :as io]
+   [clojure.java.shell :refer [sh]])
   (:gen-class))
 
 (def OUT "docs")
@@ -27,7 +29,8 @@
   (mkdir)
   (build-assets)
   (build-html)
-  (build-css))
+  (build-css)
+  (build-blogs OUT))
 
 (defn -main [& args]
   (println "Statring build")

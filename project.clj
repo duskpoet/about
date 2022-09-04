@@ -6,7 +6,9 @@
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [hiccup "1.0.5"]
                  [clojure.java-time "0.3.2"]
-                 [garden "1.3.10"]]
+                 [garden "1.3.10"]
+                 [markdown-clj "1.11.3"]
+                 [clj-http "3.12.3"]]
   :main about.core
   :repl-options {:init-ns about.core}
   :repl {:plugins [[cider/cider-nrepl "0.25.2"]]})
