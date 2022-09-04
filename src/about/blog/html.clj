@@ -20,7 +20,7 @@
             [:div.row
              [:div.col.s12.m12.l12
               [:h2 
-               [:a {:href (str "/blog/" (blog :slug) ".html")}
+               [:a {:href (str "blog/" (blog :slug) ".html")}
                  (blog :title)]]
               [:span (blog :date)]]])]]]]))
 
