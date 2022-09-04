@@ -7,8 +7,8 @@
       [:meta {:http-equiv "content-type" :content "text/html; charset=utf-8"}]
       [:meta {:name "viewport" :content "width=device-width,initial-scale=1.0,viewport-fit=cover"}]
       [:title "Eduard's blog"]
-      (include-css "/assets/tui/tuicss.min.css")
-      (include-css "/style.css")]
+      (include-css "assets/tui/tuicss.min.css")
+      (include-css "style.css")]
     [:body
       [:div.content.tui-bg-cyan-white.blue-168-text.center
         [:div.container
@@ -30,8 +30,8 @@
       [:meta {:http-equiv "content-type" :content "text/html; charset=utf-8"}]
       [:meta {:name "viewport" :content "width=device-width,initial-scale=1.0,viewport-fit=cover"}]
       [:title "Eduard's blog"]
-      (include-css "/assets/tui/tuicss.min.css")
-      (include-css "/style.css")]
+      (include-css "../assets/tui/tuicss.min.css")
+      (include-css "../style.css")]
     [:body
       [:div.tui-bg-cyan-white
         [:div.container.article
