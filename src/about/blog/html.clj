@@ -39,7 +39,7 @@
       (include-css "../style.css")]
     [:body
       (nav-bar)
-      [:div.tui-bg-cyan-white
+      [:div.bg-article
         [:div.container.article
          [:div.row
           [:div.col.s12.m8.l8

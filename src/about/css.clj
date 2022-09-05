@@ -73,7 +73,9 @@
      {:display "none"}]]
 
    [:.edu {:text-align "left"}]
-   
+
+   [:.bg-article
+    {:background "#d2ffff"}]
    [:.article 
     {:color "#1f1f1f"
      :line-height "26px"
