@@ -7,6 +7,8 @@
    [clojure.string :as string]
    [markdown.core :as markdown]))
 
+(defn link-url [blog]
+  (str (:github blog) "/tree/master/"))
 
 (def blogs
   (->>
@@ -19,7 +21,7 @@
                   (-> (http/get (blog :url))
                       :body
                       (markdown/md-to-html-string)
-                      (string/replace #"href='\./" (str "href='" (blog :base-url)))))))
+                      (string/replace #"href='\./" (str "href='" (link-url blog)))))))
     (map (fn [blog]
            (assoc blog
                   :title

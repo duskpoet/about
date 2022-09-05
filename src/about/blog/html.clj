@@ -25,7 +25,9 @@
               [:h2 
                [:a {:href (str "blog/" (blog :slug) ".html")}
                  (blog :title)]]
-              [:span (blog :date)]]])]]]]))
+              [:span (blog :date)]
+              [:br][:br]
+              [:a {:href (blog :github)} "Github"]]])]]]]))
 
 (defn artictle-html [blog]
   (html5
@@ -41,5 +43,7 @@
         [:div.container.article
          [:div.row
           [:div.col.s12.m8.l8
+           [:a {:href (:github blog)} "Github"]
+           [:br]
            (blog :content)]]]]]))
   
