@@ -19,13 +19,13 @@
           [:div.col.s12.m8.l8.offset-m2.offset-l2
            "These are articles I've written on various topics and want to share with anyone who is interested"]]
          [:section.articles.left-align
-           (for [blog blogs]
+           (for [blog (reverse blogs)]
             [:div.row
              [:div.col.s12.m12.l12
               [:h2 
                [:a {:href (str "blog/" (blog :slug) ".html")}
                  (blog :title)]]
-              [:span (blog :date)]
+              [:span (->> blog :date (.format (java.text.SimpleDateFormat. "yyyy-MM-dd")))]
               [:br][:br]
               [:a {:href (blog :github)} "Github"]]])]]]]))
 
