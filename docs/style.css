@@ -155,6 +155,11 @@ ul.job-notable li {
   white-space: break-spaces;
 }
 
+.article img {
+  max-width: 100%;
+  margin: 16px 0;
+}
+
 @media (max-width: 800px) {
 
   body {

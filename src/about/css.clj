@@ -86,7 +86,9 @@
            :padding "10px"
            :border-radius "4px"
            :border "1px solid #ccc"
-           :white-space "break-spaces"}]]
+           :white-space "break-spaces"}]
+    [:img {:max-width "100%"
+           :margin "16px 0"}]]
 
    (at-media {:max-width "800px"}
     [:body {:font-size "14px"}]
