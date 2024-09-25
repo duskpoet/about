@@ -33,6 +33,7 @@
      [:meta
       {:name "viewport",
        :content "width=device-width,initial-scale=1.0,viewport-fit=cover"}]
+     [:link {:rel "icon", :href "assets/favicon.ico"}]
      [:title "About Eduard's professional skills"]
      (include-css "assets/tui/tuicss.min.css") (include-css "style.css")]
     [:body (nav-bar)
@@ -45,10 +46,10 @@
         [:span.skills [:span.skill "typescript" [:span.skill-js "java"]]
          [:span.skill "node"] [:span.skill "react"] [:span.skill "git"]] [:br]
         [:label "Confident in:"]
-        [:span.skills [:span.skill "clojure"] [:span.skill "sql"]
-         [:span.skill "mongo"]] [:br] [:label "Some skills.:"]
+        [:span.skills [:span.skill "go"] [:span.skill "clojure"]
+         [:span.skill "sql"]] [:br] [:label "Some skills.:"]
         [:span.skills [:span.skill "python"] [:span.skill "docker"]
-         [:span.skill "kubernetes"] [:span.skill "nginx"]
+         [:span.skill "kubernetes"] [:span.skill "mongo"] [:span.skill "nginx"]
          [:span.skill "clickhouse"] [:span.skill "c"]]]
        [:div.photo [:iframe.tui-bg-orange-white {:src "assets/me.html"}]]]
       [:section.job-exp.tui-window
@@ -57,9 +58,10 @@
          [:div.job-title "Software engineer. Since Jul. 2022"]
          [:p.job-description "Frontend/backend developer of the cloud console"]
          [:ul.job-notable
-          [:li "Was a pioneer in may initiatives since was an early joiner"]
-          [:li "Implemented an oauth flow in a short timeframe"]
-          [:li "Introduced AI features into the console"]]]
+          [:li "Was a pioneer in may initiatives since I was an early joiner"]
+          [:li "Implemented an OAuth flow in a short timeframe"]
+          [:li "Introduced AI features into the console"]
+          [:li "Hired many talented developers"]]]
         [:div.job [:div.title "Cube.dev"]
          [:div.job-title "Software engineer. Since Oct. 2021"]
          [:p.job-description "Cloud infrastructure developer"]
