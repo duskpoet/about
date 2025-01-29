@@ -57,9 +57,9 @@
         [:div.job [:div.title "Neon.tech"]
          [:div.job-title "Software engineer. Since Jul. 2022"]
          [:p.job-description "Frontend/backend developer of the cloud console"]
-         [:ul.job-notable
-          [:li "Was a pioneer in may initiatives since I was an early joiner"]
-          [:li "Implemented an OAuth flow in a short timeframe"]
+         [:ul.job-notable [:li "Implemented an OAuth flow in a short timeframe"]
+          [:li "Introduced a first typescript microservice in the stack"]
+          [:li "Started and maintained our cli app \"neonctl\""]
           [:li "Introduced AI features into the console"]
           [:li "Hired many talented developers"]]]
         [:div.job [:div.title "Cube.dev"]

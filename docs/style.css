@@ -257,5 +257,9 @@ ul.job-notable li {
   div.job:not(:last-of-type) {
     border-bottom: 1px solid #ccc;
   }
+  
+  nav.tui-nav {
+    display: none;
+  }
 
 }
