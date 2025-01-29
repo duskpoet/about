@@ -56,7 +56,7 @@
        [:fieldset.tui-fieldset [:legend "Job experience"]
         [:div.job [:div.title "Neon.tech"]
          [:div.job-title "Software engineer. Since Jul. 2022"]
-         [:p.job-description "Frontend/backend developer of the cloud console"]
+         [:p.job-description "Fullstack developer"]
          [:ul.job-notable [:li "Implemented an OAuth flow in a short timeframe"]
           [:li "Introduced a first typescript microservice in the stack"]
           [:li "Started and maintained our cli app \"neonctl\""]
