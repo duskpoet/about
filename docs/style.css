@@ -117,11 +117,11 @@ ul.job-notable li {
   margin-left: 20px;
 }
 
-.links>a {
+.links a {
   margin-left: 24px;
 }
 
-.links>a .link-href {
+.links a .link-href {
   display: none;
 }
 
@@ -208,6 +208,14 @@ ul.job-notable li {
     color: #000 !important;
   }
   
+  .skip-print {
+    display: none;
+  }
+  
+  body {
+    font-size: 12px;
+  }
+  
   .tui-window {
     box-shadow: none;
   }
@@ -242,10 +250,6 @@ ul.job-notable li {
   .links>a:after {
     content: '\a';
     white-space: pre;
-  }
-  
-  .links>a[href^="https://habr.com"] {
-    display: none;
   }
   
   .link-pads {

@@ -111,6 +111,6 @@
         [:p.description
          "MSU, Faculty of Computational Mathematics and Cybernetics with master’s degree in “Applied Mathematics and Computer Science”, 2007 &mdash; 2013"]]]
       [:section.links (link "mailto:bird.duskpoet@gmail.com" "Email")
-       (link "https://habr.com/ru/post/522864" "Habr")
+       [:span.skip-print (link "https://habr.com/ru/post/522864" "Habr")]
        (link "https://github.com/duskpoet" "Github")
-       (link "blog.html" "Blog")]]]))
+       [:span.skip-print (link "blog.html" "Blog")]]]]))
