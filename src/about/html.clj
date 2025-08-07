@@ -34,14 +34,19 @@
       {:name "viewport",
        :content "width=device-width,initial-scale=1.0,viewport-fit=cover"}]
      [:link {:rel "icon", :href "assets/favicon.ico"}]
+     [:meta {:name "description", :content "Eduard Dykman is a software engineer with 10+ years of experience in web development."}]
+     [:meta {:name "keywords", :content "Eduard Dykman, software engineer, web developer, fullstack developer, typescript, node"}]
+     [:meta {:name "author", :content "Eduard Dykman"}]
+     [:meta {:property "og:title", :content "About Eduard Dykman"}]
+     [:meta {:property "og:description", :content "Eduard Dykman is a software engineer with 10+ years of experience in web development."}]
      [:title "About Eduard's professional skills"]
      (include-css "assets/tui/tuicss.min.css") (include-css "style.css")]
     [:body (nav-bar)
      [:div.content.tui-bg-yellow-white.center
       [:section.about-me.tui-window
        [:div.info-me.white-255-text [:label "Name........:"]
-        [:span.value "Eduard Dyckman"] [:br] [:label "Age.........:"]
-        [:span.value AGE] [:br] [:label "From........:"] [:span.value "Moscow"]
+        [:span.value "Eduard Dykman"] [:br] [:label "Age.........:"]
+        [:span.value AGE] [:br] [:label "From........:"] [:span.value "Haifa, Israel"]
         [:br] [:label "Main skills.:"]
         [:span.skills [:span.skill "typescript" [:span.skill-js "java"]]
          [:span.skill "node"] [:span.skill "react"] [:span.skill "git"]] [:br]
@@ -50,14 +55,16 @@
          [:span.skill "sql"]] [:br] [:label "Some skills.:"]
         [:span.skills [:span.skill "python"] [:span.skill "docker"]
          [:span.skill "kubernetes"] [:span.skill "mongo"] [:span.skill "nginx"]
-         [:span.skill "clickhouse"] [:span.skill "c"]]]
+         [:span.skill "olap"]]]
        [:div.photo [:iframe.tui-bg-orange-white {:src "assets/me.html"}]]]
       [:section.job-exp.tui-window
        [:fieldset.tui-fieldset [:legend "Job experience"]
         [:div.job [:div.title "Neon.tech"]
          [:div.job-title "Software engineer. Since Jul. 2022"]
          [:p.job-description "Fullstack developer"]
-         [:ul.job-notable [:li "Implemented an OAuth flow in a short timeframe"]
+         [:ul.job-notable 
+          [:li "Developed and pushed growth initiatives, such as credit system"]
+          [:li "Implemented an OAuth flow in a short timeframe"]
           [:li "Introduced a first typescript microservice in the stack"]
           [:li "Started and maintained our cli app \"neonctl\""]
           [:li "Introduced AI features into the console"]
