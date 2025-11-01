@@ -16,7 +16,7 @@
   (spit (io/file OUT "style.css") (css)))
 
 (defn build-assets []
-  (sh "cp" "-rf" "resources/assets/" "docs/"))
+  (sh "cp" "-rf" "resources/assets" "docs/"))
 
 (defn clean []
   (sh "rm" "-rf" OUT))
