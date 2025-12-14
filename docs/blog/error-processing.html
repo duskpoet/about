@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html><head><meta content="text/html; charset=utf-8" http-equiv="content-type"><meta content="width=device-width,initial-scale=1.0,viewport-fit=cover" name="viewport"><title>Eduard's blog</title><link href="../assets/tui/tuicss.min.css" rel="stylesheet" type="text/css"><link href="../style.css" rel="stylesheet" type="text/css"></head><body><nav class="tui-nav"><ul><li><a href="https://duskpoet.github.io/about/index.html">Home</a></li><li><a href="https://duskpoet.github.io/about/blog.html">Blog</a></li></ul></nav><div class="bg-article"><div class="container article"><div class="row"><div class="col s12 m8 l8"><a href="https://github.com/duskpoet/error_processing">Github</a><br><h1>Imprisoning the Panic</h1><p><img src="https://raw.githubusercontent.com/duskpoet/error_processing/refs/heads/master/bugs.jpg" alt="bug in a cage" /></p><pre><code class="rust">let &#40;feature&#95;values, &#95;&#41; = features
+        .append&#95;with&#95;names&#40;&amp;self.config.feature&#95;names&#41;
+        .unwrap&#40;&#41;;
+</code></pre><p>This single line of code recently made a significant portion of the Internet unavailable throughout the world. Yes, I am talking about the infamous Cloudflare outage of November 2025. A lot of fundamental services like X, Zoom, your favorite AI chats, and, the irony - Downdetector, were totally or partially unavailable. In Rust, unwrapping an error results in a panic, which is exactly what happened, causing the specific proxy service unavailability and therefore the aforementioned chaos. There are a lot of ways this problem could have been avoided, like making an optional service failure non-critical for the main service, but today I want to specifically inspect how different languages handle unexpected and erroneous situations like the one I've started the article with.</p><h2>Premise</h2><p>For every language considered, I am exploring the go-to approach to error handling, and then reason over the following situation: I am writing a web service that uses a 3rd party library that potentially could break in unexpected ways, and how can I, as a main and responsible developer, protect myself and my product.</p><h2>Rust</h2><p>The default approach in Rust - the Result type - is basically an <a href='https://www.sandromaglione.com/articles/either-error-handling-functional-programming'>Either monad</a>. The idea of Either is that a value can be exact one of two types, in our case, it's either a normal, success-path value or an error. Processing a Result value is straightforward - we designate what we do in case of a normal value, and what we do in case of an error:<pre><code class="rust">fn divide&#40;a: f64, b: f64&#41; -&gt; Result&lt;f64, String&gt; {
+    if b == 0.0 {
+        return Err&#40;&quot;division by zero&quot;.to&#95;string&#40;&#41;&#41;;
+    }
+    Ok&#40;a / b&#41;
+}
+
+match divide&#40;10.0, 2.0&#41; {
+        Ok&#40;result&#41; =&gt; println!&#40;&quot;Result: {:.2}&quot;, result&#41;,
+        Err&#40;e&#41; =&gt; {
+            println!&#40;&quot;Error: {}&quot;, e&#41;;
+        }
+}
+</code></pre></p><p>Everything is nice and smooth until a developer decides to skip this process of the result checkup and forcefully acknowledges that an error cannot happen. In this case, one can use methods like <code>unwrap</code>, <code>expect</code>, which return a normal value or panic if the result contains an error. Let's see how one can protect oneself against something going wrong.</p><p>There is a method <code>std::panic::catch&#95;unwind</code> that catches some panics and wraps them into the result type again.<pre><code class="rust">let result = panic::catch&#95;unwind&#40;|| {
+    panic!&#40;&quot;oh no!&quot;&#41;;
+}&#41;;
+</code></pre></p><p>This method catches only panics that are implemented via stack unwinding, so it doesn't work for</p><ul><li>crates that were built with panic = "abort" option.</li><li>panics that happen during the unwinding process</li><li>foreign exceptions (like a C++ throw)</li></ul><p>And this method also doesn't catch direct terminations like <code>process::exit</code>.</p><h2>Go</h2><p>It may not look like it at first, but Go actually has a very similar approach to error handling:</p><ul><li>there is a special <code>error</code> type which is an interface with a single method that returns a string. It could be passed around as any other object</li><li>there is a tuple construct, and any function can return a tuple of arbitrary values</li></ul><p>Combining all this, we get the following:<pre><code class="go">func divide&#40;a, b float64&#41; &#40;float64, error&#41; {
+    if b == 0 {
+        return 0, errors.New&#40;&quot;division by zero&quot;&#41;
+    }
+    return a / b, nil
+}
+
+result, err := divide&#40;num1, num2&#41;
+if err != nil {
+        fmt.Println&#40;&quot;Oh no, it's an error:&quot;, err&#41;
+} else {
+        fmt.Printf&#40;&quot;Result: %f&quot;, result&#41;
+}
+</code></pre></p><p>So, there is no unwrapping, and result inspection should not cause a panic. But there are other ways to cause a panic in Go, like trying to read a nil value or directly causing a panic with the <code>panic</code> function. Luckily, there is a way to catch a panic and process it gracefully:<pre><code class="go">func main&#40;&#41; {
+    defer func&#40;&#41; {
+        if r := recover&#40;&#41;; r != nil {
+            fmt.Println&#40;&quot;Recovered. Error:\n&quot;, r&#41;
+        }
+    }&#40;&#41;
+    mayPanic&#40;&#41;
+    fmt.Println&#40;&quot;After mayPanic&#40;&#41;&quot;&#41;
+}
+</code></pre></p><p>There is no way to prevent a process exit with <code>os.Exit&#40;code&#41;</code> call, so we can't be fully protected from the foreign code misbehavior.<br /></p><h2>Python</h2><p>Python uses exceptions as the main error-handling mechanism. There are built-in exceptions, and a developer can define their own exceptions by inheriting from the <code>Exception</code> class:<pre><code class="python">def divide&#40;a, b&#41;:
+        return a / b
+        
+try:
+        result = divide&#40;10, 0&#41;
+except ZeroDivisionError as e: # or &quot;Exception as e&quot; to catch all exceptions
+        print&#40;&quot;Error:&quot;, e&#41;
+</code></pre></p><p>To exit a program, one can use <code>sys.exit&#40;code&#41;</code> function, which actually raises a <code>SystemExit</code> exception. And that means we can catch it and prevent the abrupt termination of a program. There is also a <code>os.&#95;exit&#40;code&#41;</code> function that terminates the process immediately without any cleanup and cannot be caught, so there is no way to fully protect from that situation, but it's also a pretty exotic and extreme case.</p><h2>Java</h2><p>Now, Java also uses exceptions as the main error handling mechanism, which is very similar to Python. For a forceful exit there is a <code>System.exit&#40;code&#41;</code> or <code>Runtime.getRuntime&#40;&#41;.exit&#40;code&#41;</code> methods that terminate the process, but can be caught by a shutdown hook:<pre><code class="java">public class ExitProtectionDemo {
+    public static void main&#40;String&#91;&#93; args&#41; {
+        SecurityManager original = System.getSecurityManager&#40;&#41;;
+        
+        try {
+            // Install protective security manager
+            System.setSecurityManager&#40;new SecurityManager&#40;&#41; {
+                @Override
+                public void checkExit&#40;int status&#41; {
+                    throw new SecurityException&#40;&quot;Exit blocked: &quot; + status&#41;;
+                }
+                
+                @Override
+                public void checkPermission&#40;java.security.Permission perm&#41; {
+                    // Allow everything else
+                }
+            }&#41;;
+            
+            // This would normally terminate the program
+            System.out.println&#40;&quot;About to call System.exit&#40;&#41;...&quot;&#41;;
+            System.exit&#40;42&#41;;
+            
+        } catch &#40;SecurityException e&#41; {
+            System.out.println&#40;&quot;Caught: &quot; + e.getMessage&#40;&#41;&#41;;
+            System.out.println&#40;&quot;Program survived!&quot;&#41;;
+            
+        } finally {
+            // Restore original security manager
+            System.setSecurityManager&#40;original&#41;;
+        }
+    }
+}
+</code></pre></p><p>This approach is considered deprecated in newer versions, and it also doesn't catch <code>Runtime.halt&#40;code&#41;</code> calls that immediately terminate the JVM.</p><h2>Javascript</h2><p>Once again, Javascript uses exceptions for error handling, with the difference that it's not possible to only catch certain exceptions, so developers should filter out and process inside the <code>catch</code> block:<pre><code class="javascript">function referenceUnknownVariable&#40;&#41; {
+        return unknownVar;
+}
+
+try {
+        referenceUnknownVariable&#40;&#41;;
+} catch &#40;ex&#41; {
+        if &#40;ex instanceof ReferenceError&#41; {
+                console.log&#40;&quot;Caught a ReferenceError:&quot;, ex.message&#41;;
+        } else {
+                console.error&#40;&quot;Unexpected error:&quot;, ex&#41;;
+        }
+}
+</code></pre></p><p>It doesn't make much sense to use division by zero as an example, since it's a totally legit operation in Javascript and the result is <code>Infinity</code>! That's definitely an interesting way to avoid abrupt termination. For a forceful exit, there is a <code>process.exit&#40;code&#41;</code> method in Node.js, which immediately terminates the process and cannot be caught. But Javascript wouldn't be a <a href='https://www.destroyallsoftware.com/talks/wat'>meme</a> if there wasn't some weird way to work around that:<pre><code class="javascript">const originalExit = process.exit;
+class ExitException extends Error {
+        constructor&#40;code&#41; {
+                super&#40;`Exit blocked: ${code}`&#41;;
+                this.code = code;
+                
+        }
+}
+process.exit = &#40;code&#41; =&gt; {
+   throw new ExitException&#40;code&#41;;
+};
+
+...
+
+originalExit.call&#40;process, code&#41;; // when you really want to exit
+</code></pre></p><h2>C++</h2><p>I won't go into details, C++ has exceptions similar to Java and Python as a main historical mechanism for error handling, but it also has a structure similar to Rust's Result type in the form of <code>std::expected</code> (since C++23). There are also forceful termination methods, some of which can be caught via global handlers, and some cannot.</p><h2>Summary</h2><p>From the catch and recovery standpoint, Javascript and Go seem to be the most permissive languages, with Go's recovery function and Javascript's ability to monkey-patch whatever you want. I don't see obvious gaps in other languages though, so it all comes down to picking the right robust tools for the job. I would suggest scanning 3rd party libraries for any direct process termination calls if this is a critical requirement for your project.</p><p>After thorough thinking, I still believe that careful architectural design is the best long-term failure tolerance strategy. If your service has a non-critical dependency that relies on external setup, make sure that failure of that dependency doesn't block or crash your main service. Another strategy is to partition your service into multiple clusters and do a gradual rollout of new versions to minimize the blast radius.  After all, the language is just a tool, and it's up to you not to smack your thumb with it.</p></div></div></div></div></body></html>

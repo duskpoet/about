@@ -9,26 +9,30 @@
 
 (defn link-url [blog]
   (str (:github blog) "/tree/master/"))
+(defn link-img [blog]
+  (-> (:url blog)
+      (string/replace #"\/[^\/]+$" "/")))
 
 (def blogs
   (->>
-    (io/resource "blogs.edn")
-    (slurp)
-    (read-string)
-    (map (fn [blog]
-           (assoc blog
-                  :content
-                  (-> (http/get (blog :url))
-                      :body
-                      (markdown/md-to-html-string)
-                      (string/replace #"href='\./" (str "href='" (link-url blog)))))))
-    (map (fn [blog]
-           (assoc blog
-                  :title
-                  (->> (blog :content)
-                       (re-find #"\<h1\>(.*)\<\/h1\>")
-                       second))))
-    vec))
+   (io/resource "blogs.edn")
+   (slurp)
+   (read-string)
+   (map (fn [blog]
+          (assoc blog
+                 :content
+                 (-> (http/get (blog :url))
+                     :body
+                     (markdown/md-to-html-string)
+                     (string/replace #"src=\"\./" (str "src=\"" (link-img blog)))
+                     (string/replace #"href='\./" (str "href='" (link-url blog)))))))
+   (map (fn [blog]
+          (assoc blog
+                 :title
+                 (->> (blog :content)
+                      (re-find #"\<h1\>(.*)\<\/h1\>")
+                      second))))
+   vec))
 
 (defn build-blogs [out]
   (spit (io/file out "blog.html") (blog-html/blogs-html blogs))
