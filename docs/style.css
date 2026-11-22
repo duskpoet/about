@@ -125,7 +125,7 @@ ul.job-notable li {
   display: none;
 }
 
-.edu {
+.edu, .summary {
   text-align: left;
 }
 

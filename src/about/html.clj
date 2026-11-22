@@ -34,11 +34,11 @@
      {:name "viewport",
       :content "width=device-width,initial-scale=1.0,viewport-fit=cover"}]
     [:link {:rel "icon", :href "assets/favicon.ico"}]
-    [:meta {:name "description", :content "Eduard Dykman is a software engineer with 10+ years of experience in web development."}]
-    [:meta {:name "keywords", :content "Eduard Dykman, software engineer, web developer, fullstack developer, typescript, node"}]
+    [:meta {:name "description", :content "Eduard Dykman is a full-stack engineer with 13+ years of experience building developer platforms, cloud infrastructure, and AI-integrated software."}]
+    [:meta {:name "keywords", :content "Eduard Dykman, software engineer, full-stack developer, developer platforms, cloud infrastructure, AI, typescript, node, go"}]
     [:meta {:name "author", :content "Eduard Dykman"}]
     [:meta {:property "og:title", :content "About Eduard Dykman"}]
-    [:meta {:property "og:description", :content "Eduard Dykman is a software engineer with 10+ years of experience in web development."}]
+    [:meta {:property "og:description", :content "Eduard Dykman is a full-stack engineer with 13+ years of experience building developer platforms, cloud infrastructure, and AI-integrated software."}]
     [:title "About Eduard's professional skills"]
     (include-css "assets/tui/tuicss.min.css") (include-css "style.css")]
    [:body (nav-bar)
@@ -54,34 +54,40 @@
        [:span.skills [:span.skill "go"] [:span.skill "clojure"]
         [:span.skill "sql"]] [:br] [:label "Some skills.:"]
        [:span.skills [:span.skill "python"] [:span.skill "rust"] [:span.skill "docker"]
-        [:span.skill "kubernetes"] [:span.skill "mongo"] [:span.skill "nginx"]
+        [:span.skill "kubernetes"] [:span.skill "postgres"] [:span.skill "mongo"]
+        [:span.skill "react"] [:span.skill "sveltekit"] [:span.skill "oauth"]
         [:span.skill "olap"]]]
       [:div.photo [:iframe.tui-bg-orange-white {:src "assets/me.html"}]]]
+     [:section.summary.tui-window
+      [:fieldset.tui-fieldset [:legend "Summary"]
+       [:p.description
+        "Full-stack engineer with over 13 years of experience building developer platforms, cloud infrastructure, and AI-integrated software, with a focus on product growth. Works across system design and hands-on implementation, owning features end-to-end from frontend to infrastructure and taking products from MVP to production."]]]
      [:section.job-exp.tui-window
       [:fieldset.tui-fieldset [:legend "Job experience"]
        [:div.job [:div.title "ArchetypeAI"]
         [:div.job-title "Software engineer. Since Dec. 2025"]
         [:div.job-description "Senior Full-Stack engineer"]
         [:ul.job-notable
-         [:li "Lead the platform console from MVP state to the production-ready one"]
-         [:li "Prepared and improved platform towards AI-first coding"]
-         [:li "Established communication and engineering practices between design and engineering"]]]
-       [:div.job [:div.title "Neon.tech -> Databricks"]
+         [:li "Took over the platform console as an unstructured prototype and brought it to production: refactored the codebase, expanded test coverage, set up CI pipelines, and fixed the known bugs"]
+         [:li "Prepared the codebase for AI-assisted development: wrote CLAUDE.md agent instructions and reusable skills, and added the test suite to CI as a check on agent-written code"]
+         [:li "Set up a design-to-engineering workflow where designers either hand over coded throwaway prototypes as input for new features or build features with Claude Code and open pull requests for review"]]]
+       [:div.job [:div.title "Neon (acquired by Databricks)"]
         [:div.job-title "Software engineer. Since Jun. 2022"]
         [:p.job-description "Fullstack developer"]
         [:ul.job-notable
-         [:li "Developed, coordinated and pushed growth initiatives, such as credits system"]
-         [:li "Implemented an OAuth flow in a short timeframe"]
-         [:li "Introduced a first typescript microservice in the stack"]
-         [:li "Started and maintained our cli app \"neonctl\""]
-         [:li "Introduced first AI features into the console"]
-         [:li "Hired many talented developers"]]]
+         [:li "Built the Hasura integration after Heroku sunset its free Postgres tier, making Neon Hasura's default database provider; daily signups grew 4x (about 30 to 120 per day)"]
+         [:li "Designed and built Neon's OAuth provider on ORY Hydra and extended the public API for partner provisioning; it became the model for later integrations with Vercel, Replit, and Retool"]
+         [:li "Created neonctl, Neon's official CLI, and led it as top contributor (about 200 commits, 360+ releases); it now sees 2M+ npm downloads a month"]
+         [:li "Developed, coordinated and pushed growth initiatives, such as a credits system"]
+         [:li "Introduced the first TypeScript microservice in the stack"]
+         [:li "Introduced the first AI features into the console"]
+         [:li "Interviewed about 50 engineering candidates and hired around 5; the early hires became foundational to the company's growth"]]]
        [:div.job [:div.title "Cube.dev"]
         [:div.job-title "Software engineer. Since Oct. 2021"]
         [:p.job-description "Cloud infrastructure developer"]
         [:ul.job-notable
          [:li "Implemented alerting system pipeline from scratch"]
-         [:li "Improved number of ui and infrastructure features"]]]
+         [:li "Improved several UI and infrastructure features"]]]
        [:div.job [:div.title "Yandex"]
         [:div.job-title "Frontend dev. Since Apr. 2018"]
         [:p.job-description
@@ -103,20 +109,20 @@
         [:p.job-description "Web developer"]
         [:ul.job-notable
          [:li "Wrote integration scripts for external ecommerce platforms"]
-         [:li "Build advertising web-site from scratch"]]]
+         [:li "Built the company's advertising website from scratch"]]]
        [:div.job [:div.title "Mail.ru Group"]
         [:div.job-title "Frontend dev. Since Aug. 2015"]
         [:p.job-description "Developed web app for analytical tracking system"]
         [:ul.job-notable
          [:li
-          "Wrote cartographic report from scratch (including retrieving raw maps and converting them to web format"]
-         [:li "Worked on a huge advertising platform with 7 teammates"]]]
+          "Wrote a map-based report from scratch (including retrieving raw map data and converting it to web format)"]
+         [:li "Worked on a large advertising platform in a team of 8"]]]
        [:div.job [:div.title "Undev"]
         [:div.job-title "Frontend ninja. Since Dec. 2013"]
         [:p.job-description "Developed various frontends"]
         [:ul.job-notable
          [:li
-          "Wrote frontend for video broadcast service of state elections and examinations"]
+          "Wrote frontend for a live video broadcast service of state elections and examinations"]
          [:li
           "Optimized and refactored module for producing clustered geo data"]
          [:li "Wrote game app and media transmit protocol for Smart TV"]]]]]

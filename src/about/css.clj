@@ -54,7 +54,7 @@
      [:&:before {:content "'Notable projects: '", :font-weight "bold"}]
      [:li {:list-style-type "circle", :margin-left "20px"}]]
     [:.links [:a {:margin-left "24px"} [:.link-href {:display "none"}]]]
-    [:.edu {:text-align "left"}]
+    [:.edu :.summary {:text-align "left"}]
     [:.bg-article {:background "#d2ffff"}]
     [:.article {:color "#1f1f1f", :line-height "26px", :padding "40px 0"}
      [:h1 {:font-size "24px"}] [:a {:color "#0000A8"}]
