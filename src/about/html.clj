@@ -19,6 +19,18 @@
   [:a {:href url} (vec (cons :button.tui-button content))
    [:span.link-pads (link-pads content)] [:span.link-href (sanitize-link url)]])
 
+(defn job
+  "A job entry on the timeline. The job's left border is the timeline line;
+  `since` (\"Jun 2022\") is marked by a horizontal tick below the job, showing
+  the year with the month revealed on hover. Jobs go newest first, so the top
+  of the line is the present."
+  [title role since & body]
+  (let [[month year] (string/split since #" ")]
+    [:div.job
+     (into [:div.job-body [:div.title title] [:div.job-title role]] body)
+     [:div.job-since
+      [:time {:datetime year} [:span.since-month (str month " ")] year]]]))
+
 (defn nav-bar
   []
   [:nav.tui-nav
@@ -63,16 +75,14 @@
        [:p.description
         "Full-stack engineer with over 13 years of experience building developer platforms, cloud infrastructure, and AI-integrated software, with a focus on product growth. Works across system design and hands-on implementation, owning features end-to-end from frontend to infrastructure and taking products from MVP to production."]]]
      [:section.job-exp.tui-window
-      [:fieldset.tui-fieldset [:legend "Job experience"]
-       [:div.job [:div.title "ArchetypeAI"]
-        [:div.job-title "Software engineer. Since Dec. 2025"]
+      [:fieldset.tui-fieldset [:legend "Job experience"] [:p.timeline-now "Now"]
+       (job "ArchetypeAI" "Software engineer" "Dec 2025"
         [:div.job-description "Senior Full-Stack engineer"]
         [:ul.job-notable
          [:li "Took over the platform console as an unstructured prototype and brought it to production: refactored the codebase, expanded test coverage, set up CI pipelines, and fixed the known bugs"]
          [:li "Prepared the codebase for AI-assisted development: wrote CLAUDE.md agent instructions and reusable skills, and added the test suite to CI as a check on agent-written code"]
-         [:li "Set up a design-to-engineering workflow where designers either hand over coded throwaway prototypes as input for new features or build features with Claude Code and open pull requests for review"]]]
-       [:div.job [:div.title "Neon (acquired by Databricks)"]
-        [:div.job-title "Software engineer. Since Jun. 2022"]
+         [:li "Set up a design-to-engineering workflow where designers either hand over coded throwaway prototypes as input for new features or build features with Claude Code and open pull requests for review"]])
+       (job "Neon (acquired by Databricks)" "Software engineer" "Jun 2022"
         [:p.job-description "Fullstack developer"]
         [:ul.job-notable
          [:li "Built the Hasura integration after Heroku sunset its free Postgres tier, making Neon Hasura's default database provider; daily signups grew 4x (about 30 to 120 per day)"]
@@ -81,15 +91,13 @@
          [:li "Developed, coordinated and pushed growth initiatives, such as a credits system"]
          [:li "Introduced the first TypeScript microservice in the stack"]
          [:li "Introduced the first AI features into the console"]
-         [:li "Interviewed about 50 engineering candidates and hired around 5; the early hires became foundational to the company's growth"]]]
-       [:div.job [:div.title "Cube.dev"]
-        [:div.job-title "Software engineer. Since Oct. 2021"]
+         [:li "Interviewed about 50 engineering candidates and hired around 5; the early hires became foundational to the company's growth"]])
+       (job "Cube.dev" "Software engineer" "Oct 2021"
         [:p.job-description "Cloud infrastructure developer"]
         [:ul.job-notable
          [:li "Implemented alerting system pipeline from scratch"]
-         [:li "Improved several UI and infrastructure features"]]]
-       [:div.job [:div.title "Yandex"]
-        [:div.job-title "Frontend dev. Since Apr. 2018"]
+         [:li "Improved several UI and infrastructure features"]])
+       (job "Yandex" "Frontend dev" "Apr 2018"
         [:p.job-description
          "Alice (intelligent voice assistant) infrastructure developer"]
         [:ul.job-notable
@@ -103,29 +111,26 @@
           "Introduced redux, redux-saga, react and typescript into project from scratch"]
          [:li "Developed applicative library for redux"]
          [:li
-          "Gave series of lectures and masterclasses about typescript, redux, redux-saga"]]]
-       [:div.job [:div.title "bolt.com"]
-        [:div.job-title "Frontend dev. Since Oct. 2016"]
+          "Gave series of lectures and masterclasses about typescript, redux, redux-saga"]])
+       (job "bolt.com" "Frontend dev" "Oct 2016"
         [:p.job-description "Web developer"]
         [:ul.job-notable
          [:li "Wrote integration scripts for external ecommerce platforms"]
-         [:li "Built the company's advertising website from scratch"]]]
-       [:div.job [:div.title "Mail.ru Group"]
-        [:div.job-title "Frontend dev. Since Aug. 2015"]
+         [:li "Built the company's advertising website from scratch"]])
+       (job "Mail.ru Group" "Frontend dev" "Aug 2015"
         [:p.job-description "Developed web app for analytical tracking system"]
         [:ul.job-notable
          [:li
           "Wrote a map-based report from scratch (including retrieving raw map data and converting it to web format)"]
-         [:li "Worked on a large advertising platform in a team of 8"]]]
-       [:div.job [:div.title "Undev"]
-        [:div.job-title "Frontend ninja. Since Dec. 2013"]
+         [:li "Worked on a large advertising platform in a team of 8"]])
+       (job "Undev" "Frontend ninja" "Dec 2013"
         [:p.job-description "Developed various frontends"]
         [:ul.job-notable
          [:li
           "Wrote frontend for a live video broadcast service of state elections and examinations"]
          [:li
           "Optimized and refactored module for producing clustered geo data"]
-         [:li "Wrote game app and media transmit protocol for Smart TV"]]]]]
+         [:li "Wrote game app and media transmit protocol for Smart TV"]])]]
      [:section.edu.tui-window
       [:fieldset.tui-fieldset [:legend "Education"]
        [:p.description

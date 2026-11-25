@@ -44,9 +44,39 @@
        :color "#ffff00",
        :padding-left "4px",
        :background "#00a8a8"}] [:&:hover>.skill-js {:display "inline-block"}]]
+    ;; Timeline: the fieldset's left border is the line; "Now" and each job's
+    ;; start year are ticks branching off it. The -12px margin cancels the
+    ;; tui-fieldset padding so ticks touch the border.
+    [:.timeline-now :.job-since
+     {:position "relative",
+      :display "flex",
+      :align-items "center",
+      :margin-left "-12px",
+      :padding-left "22px",
+      :line-height "20px",
+      :text-align "left",
+      :font-weight "bold"}
+     [:&:before
+      {:content "''",
+       :position "absolute",
+       :left 0,
+       :top "9px",
+       :width "16px",
+       :height "2px",
+       :background "#ffffff"}]]
     [:.job {:text-align "left"}
-     ["&:not(:last-of-type)" {:border-bottom "1px solid #ffffff"}
-      {:margin-bottom "20px"} {:padding-bottom "10px"}]]
+     ["&:not(:last-of-type)"
+      [:.job-since:after
+       {:content "''",
+        :flex "1 1 auto",
+        :height "1px",
+        :margin-left "12px",
+        :background "#ffffff"}]]]
+    [:.job-body {:padding "8px 0 10px"}]
+    [:.job-since {:color "#ffd27c"}
+     [:time {:cursor "default"}
+      [:.since-month {:display "none"}]
+      [:&:hover [:.since-month {:display "inline"}]]]]
     [:.title {:font-size "20px", :font-weight "bold"}]
     [:.job-title {:font-size "16px"}]
     [:.job-description {:margin-top "16px"}]
@@ -89,8 +119,12 @@
                 [:.link-href {:display "initial"}]
                 [:&:after {:content "'\\a'", :white-space "pre"}]]]
               [:.link-pads {:white-space "pre"}]
-              [:div.job
-               ["&:not(:last-of-type)" {:border-bottom "1px solid #ccc"}]]
+              [:.job-since:before :.job-since:after :.timeline-now:before
+               {:background "#000 !important",
+                :-webkit-print-color-adjust "exact",
+                :print-color-adjust "exact"}]
+              [:.since-month {:display "inline !important"}]
+              [:.job-exp>.tui-fieldset {:border-left-color "#000"}]
               [:nav.tui-nav {:display "none"}])))
 
 

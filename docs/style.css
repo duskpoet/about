@@ -79,14 +79,57 @@ span.skill:hover>.skill-js {
   display: inline-block;
 }
 
+.timeline-now, .job-since {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: -12px;
+  padding-left: 22px;
+  line-height: 20px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.timeline-now:before, .job-since:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 16px;
+  height: 2px;
+  background: #ffffff;
+}
+
 .job {
   text-align: left;
 }
 
-.job:not(:last-of-type) {
-  border-bottom: 1px solid #ffffff;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
+.job:not(:last-of-type) .job-since:after {
+  content: '';
+  flex: 1 1 auto;
+  height: 1px;
+  margin-left: 12px;
+  background: #ffffff;
+}
+
+.job-body {
+  padding: 8px 0 10px;
+}
+
+.job-since {
+  color: #ffd27c;
+}
+
+.job-since time {
+  cursor: default;
+}
+
+.job-since time .since-month {
+  display: none;
+}
+
+.job-since time:hover .since-month {
+  display: inline;
 }
 
 .title {
@@ -256,10 +299,18 @@ ul.job-notable li {
     white-space: pre;
   }
   
+  .job-since:before, .job-since:after, .timeline-now:before {
+    background: #000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
   
+  .since-month {
+    display: inline !important;
+  }
   
-  div.job:not(:last-of-type) {
-    border-bottom: 1px solid #ccc;
+  .job-exp>.tui-fieldset {
+    border-left-color: #000;
   }
   
   nav.tui-nav {
